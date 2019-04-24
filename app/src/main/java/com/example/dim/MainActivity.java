@@ -1,6 +1,7 @@
 package com.example.dim;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
@@ -8,6 +9,9 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.CheckBox;
+import android.widget.RadioButton;
 
 import static com.example.dim.Constants.KEY_DIM;
 import static com.example.dim.Constants.TAG_STOP;
@@ -23,9 +27,28 @@ public class MainActivity extends AppCompatActivity {
 
     superPrefs = SuperPrefs.newInstance(this);
 
+    final CheckBox checkBox=(CheckBox) findViewById(R.id.radioBtn);
+    checkBox.setOnClickListener(new View.OnClickListener() {
+      @Override public void onClick(View v) {
+        superPrefs.setBoolNot(KEY_DIM);
+        if (superPrefs.getBool(KEY_DIM).equals(true)) {
+          checkBox.setChecked(true);
+          startService(new Intent(getApplicationContext(), ScreenDimmer.class));
+        } else {
+          checkBox.setChecked(false);
+          stopServiceIntent();
+        }
+      }
+    });
+
+  }
+
+  private void core()
+  {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
       if (!PermissionChecker.checkDrawOverlayPermission(this))
         permissionCheck(this);
+      //IF PERMISSION IS ALREADY GIVEN
       else {
         superPrefs.setBoolNot(KEY_DIM);
         // equals to true means we need to turn on the dim light
@@ -38,18 +61,17 @@ public class MainActivity extends AppCompatActivity {
         }
 
       }
-    } else {
+    }
+    //Duplicate part again for diff versions of android
+    else {
       superPrefs.setBoolNot(KEY_DIM);
       if (superPrefs.getBool(KEY_DIM).equals(true)) {
         startService(new Intent(getApplicationContext(), ScreenDimmer.class));
       } else {
-        //fabDim.setImageResource(R.drawable.anim_cross_tick);
         stopServiceIntent();
       }
-      //animate(view);
     }
   }
-
   private void stopServiceIntent() {
     Intent intent = new Intent(getApplicationContext(), ScreenDimmer.class);
     intent.setAction(TAG_STOP);
