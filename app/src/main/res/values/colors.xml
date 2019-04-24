@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <color name="colorPrimary">#008577</color>
+  <color name="colorPrimaryDark">#00574B</color>
+  <color name="colorAccent">#D81B60</color>
+  <color name="custom_red">#FF1B3C</color>
+  <color name="custom_red_dark">#da1733</color>
+
+  <color name="amber">#15b5ad</color>
+  <color name="amberDark">@color/dark</color>
+  <color name="mdtp_accent_color">#FF9800</color>
+  <color name="mdtp_accent_color_dark">#FF6F00</color>
+  <color name="black">#000000</color>
+  <color name="dark">#212121</color>
+  <color name="dark_mid">#313131</color>
+  <color name="white">#ffffff</color>
+
+  <color name="overlay_color">#5e3f4000</color>
+
+</resources>
