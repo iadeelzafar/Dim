@@ -30,19 +30,10 @@ public class MainActivity extends AppCompatActivity {
     final CheckBox checkBox=(CheckBox) findViewById(R.id.radioBtn);
     checkBox.setOnClickListener(new View.OnClickListener() {
       @Override public void onClick(View v) {
-        superPrefs.setBoolNot(KEY_DIM);
-        if (superPrefs.getBool(KEY_DIM).equals(true)) {
-          checkBox.setChecked(true);
-          startService(new Intent(getApplicationContext(), ScreenDimmer.class));
-        } else {
-          checkBox.setChecked(false);
-          stopServiceIntent();
-        }
+        core();
       }
     });
-
-  }
-
+    }
   private void core()
   {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
