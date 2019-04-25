@@ -156,20 +156,6 @@ public class ScreenDimmer extends Service implements Constants, SensorEventListe
         intentStart.setAction(TAG_START);
         PendingIntent pIntentStart = PendingIntent.getService(context, 0, intentStart, 0);
 
-        //NotificationCompat.Builder mBuilder =
-        //        new NotificationCompat.Builder(context).setOngoing(true)
-        //                .setSmallIcon(R.drawable.ic_eye)
-        //                .setContentTitle(getString(R.string.dimmer_running))
-        //                .setContentText(getString(R.string.tap_open))
-        //                .setContentIntent(pIntentActivity)
-        //                .addAction(R.drawable.ic_pause, TAG_PAUSE, pIntentPause)
-        //                .addAction(R.drawable.ic_stop, TAG_STOP, pIntentStop)
-        //                .addAction(R.drawable.ic_play_arrow, TAG_START, pIntentStart)
-        //                .setAutoCancel(true);
-        //
-        //mNotificationManager =
-        //        (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        //mNotificationManager.notify(2, mBuilder.build());
     }
 
     @Override
