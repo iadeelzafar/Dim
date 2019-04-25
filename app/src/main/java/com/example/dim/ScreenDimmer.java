@@ -33,7 +33,6 @@ public class ScreenDimmer extends Service implements Constants, SensorEventListe
     public void OnActivityEvent(ActivityEvent event) {
         if (mView != null)
             mView.setBackgroundColor(Helper.getColorInt(event.dimValue));
-        setupNotification();
     }
 
     @Override
@@ -112,7 +111,6 @@ public class ScreenDimmer extends Service implements Constants, SensorEventListe
         wm.addView(mView, params);
 
         setInitialState();
-        setupNotification();
     }
 
     private void setupSensor() {
@@ -127,35 +125,6 @@ public class ScreenDimmer extends Service implements Constants, SensorEventListe
 
         if (mView != null)
             mView.setBackgroundColor(Helper.getColorInt(p));
-    }
-
-    private void setupNotification() {
-        if (superPrefs.getBool(KEY_NOTI))
-            fireNotification();
-
-        if (!superPrefs.getBool(KEY_NOTI) && mNotificationManager != null)
-            mNotificationManager.cancelAll();
-    }
-
-    private void fireNotification() {
-
-        Context context = getApplicationContext();
-
-        Intent intentActivity = new Intent(context, MainActivity.class);
-        PendingIntent pIntentActivity = PendingIntent.getActivity(context, 0, intentActivity, 0);
-
-        Intent intentStop = new Intent(context, ScreenDimmer.class);
-        intentStop.setAction(TAG_STOP);
-        PendingIntent pIntentStop = PendingIntent.getService(context, 0, intentStop, 0);
-
-        Intent intentPause = new Intent(context, ScreenDimmer.class);
-        intentPause.setAction(TAG_PAUSE);
-        PendingIntent pIntentPause = PendingIntent.getService(context, 0, intentPause, 0);
-
-        Intent intentStart = new Intent(context, ScreenDimmer.class);
-        intentStart.setAction(TAG_START);
-        PendingIntent pIntentStart = PendingIntent.getService(context, 0, intentStart, 0);
-
     }
 
     @Override
@@ -188,7 +157,6 @@ public class ScreenDimmer extends Service implements Constants, SensorEventListe
         float x = sensorEvent.values[0];
         if (x > OPTIMAL_ABMIENT) {
             pauseServiceIntent();
-            //AlertDialogActivity.startActivity(this);
         }
     }
 
@@ -206,15 +174,4 @@ public class ScreenDimmer extends Service implements Constants, SensorEventListe
         startService(intent);
     }
 
-    private void stopServiceIntent() {
-        Intent intent = new Intent(getApplicationContext(), ScreenDimmer.class);
-        intent.setAction(TAG_STOP);
-        startService(intent);
-    }
-
-    private void startServiceIntent() {
-        Intent intent = new Intent(getApplicationContext(), ScreenDimmer.class);
-        intent.setAction(TAG_START);
-        startService(intent);
-    }
 }

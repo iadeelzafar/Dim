@@ -33,11 +33,6 @@ public class SuperPrefs implements Constants {
      * @param KEY   The unique key ID
      * @param value The string value to be stored
      */
-    public void setString(String KEY, String value) {
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(KEY, value);
-        editor.apply();
-    }
 
     /**
      * get string from sharedPreferences
@@ -45,9 +40,6 @@ public class SuperPrefs implements Constants {
      * @param KEY The unique key ID
      * @return The stored string
      */
-    public String getString(String KEY) {
-        return sharedPreferences.getString(KEY, null);
-    }
 
     /**
      * set int in sharedPreferences
@@ -55,11 +47,6 @@ public class SuperPrefs implements Constants {
      * @param KEY   The unique key ID
      * @param value The int value to be stored
      */
-    public void setInt(String KEY, int value) {
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putInt(KEY, value);
-        editor.apply();
-    }
 
     /**
      * get int from sharedPreferences
